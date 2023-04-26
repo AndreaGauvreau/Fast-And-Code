@@ -16,10 +16,12 @@ import {
   AspectRatio,
 } from '@chakra-ui/react'
 import {BsArrowUpRight, BsHeartFill, BsHeart} from 'react-icons/bs'
-import {Video} from '~/helpers/youtube'
+
+import {videos} from '~/helpers/datas'
 import {colorsUi} from '~/ui/colors.js'
 import ReactPlayer from 'react-player'
 import Link from 'next/link'
+import {Video} from '~/types/video'
 
 interface CardYtProps {
   datas: Video

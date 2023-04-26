@@ -2,9 +2,9 @@
 import {Box, VStack, Flex, Center, Text} from '@chakra-ui/react'
 import Image from 'next/image'
 import Link from 'next/link'
-import {useRouter} from 'next/router'
+
 import {usePathname} from 'next/navigation'
-import {videos} from '~/helpers/youtube'
+import {videos} from '~/helpers/datas'
 import {colorsUi} from '~/ui/colors'
 export default function Layout({children}: LayoutProps) {
   return (
@@ -21,8 +21,6 @@ export default function Layout({children}: LayoutProps) {
 
 const Sidebar = () => {
   const pathname = usePathname()
-  console.log(pathname)
-
   return (
     <VStack as="nav" spacing={4} alignItems="flex-start">
       <Center w={'100%'}>
