@@ -57,9 +57,6 @@ const CardYt: React.FC<CardYtProps> = ({datas}) => {
           <Heading color={'black'} fontSize={'2xl'} noOfLines={2}>
             {datas?.title}
           </Heading>
-          <Text color={'gray.500'} noOfLines={2}>
-            {datas?.description}
-          </Text>
         </Box>
         <HStack borderTop={'1px'} color="black" h={'55px'}>
           <Flex
