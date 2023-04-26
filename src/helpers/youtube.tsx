@@ -1,34 +1,26 @@
-import axios from 'axios'
 import {useQuery} from 'react-query'
 
 export const youtubeApi = process.env.NEXT_PUBLIC_YOUTUBE_API ?? ''
 export const chanelId = process.env.NEXT_PUBLIC_YOUTUBE_CHANEL ?? ''
 
 export interface Video {
+  id: string
   title: string
-  thumbnailUrl: string
+  imageUrl: string
+  description: string
+  url: string
+  tags: string[]
 }
 
-export async function fetchVideos(
-  apiKey: string,
-  channelId: string,
-): Promise<Video[]> {
-  console.log('passage')
-
-  const response = await axios.get(
-    `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&channelId=${channelId}&part=snippet,id&order=date&maxResults=5&fields=items(snippet(title,thumbnails(medium(url))))`,
-  )
-
-  return response.data.items.map((item: any) => ({
-    title: item.snippet.title,
-    thumbnailUrl: item.snippet.thumbnails.medium.url,
-  }))
+export async function fetchVideos(): Promise<Video[]> {
+  // Retourner l'objet 'videos' directement
+  return videos
 }
 
 export function useVideos(apiKey: string, channelId: string) {
   return useQuery<Video[], Error>(
     ['videos', apiKey, channelId],
-    () => fetchVideos(apiKey, channelId),
+    () => fetchVideos(),
     {
       keepPreviousData: true,
       staleTime: 1000 * 60 * 10, // 10 minutes
@@ -36,3 +28,24 @@ export function useVideos(apiKey: string, channelId: string) {
     },
   )
 }
+
+const videos: Video[] = [
+  {
+    id: '1',
+    title: 'Je refais (et améliore) le site de TESLA en 24H',
+    imageUrl:
+      'https://i.ytimg.com/vi/Zh06rzhTWeA/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAhnsXPRpyBWAU2pjkzJS0WekvMNQ',
+    description: 'Description de la première vidéo',
+    url: 'https://www.youtube.com/watch?v=Zh06rzhTWeA&t=1935s&ab_channel=Andreagv',
+    tags: ['Next', 'Three js', 'React'],
+  },
+  {
+    id: '2',
+    title: 'Je refais (et améliore) le site de TESLA en 24H',
+    imageUrl:
+      'https://i.ytimg.com/vi/Zh06rzhTWeA/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAhnsXPRpyBWAU2pjkzJS0WekvMNQ',
+    description: 'Description de la première vidéo',
+    url: 'https://www.youtube.com/watch?v=Zh06rzhTWeA&t=1935s&ab_channel=Andreagv',
+    tags: ['Next', 'Three js', 'React'],
+  },
+]

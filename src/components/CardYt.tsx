@@ -19,6 +19,7 @@ interface CardYtProps {
 }
 
 const CardYt: React.FC<CardYtProps> = ({datas}) => {
+  const [hoverElement, setHoverElement] = useState(false)
   const [liked, setLiked] = useState(false)
   return (
     <Center py={6} h={'500px'}>
@@ -30,35 +31,56 @@ const CardYt: React.FC<CardYtProps> = ({datas}) => {
         overflow={'hidden'}
         bg="white"
         border={'1px'}
-        borderColor="black"
-        boxShadow={useColorModeValue('6px 6px 0 black', '6px 6px 0 cyan')}
+        borderColor={hoverElement ? colorsUi.red1 : 'black'}
+        onMouseEnter={() => setHoverElement(true)}
+        onMouseLeave={() => setHoverElement(false)}
+        transition={'0.7s cubic-bezier(0.75, 0, 0.1, 1)'}
+        boxShadow={
+          hoverElement ? `12px 12px 0 ${colorsUi?.red1}` : `6px 6px 0 black`
+        }
       >
         <Box
           h={'200px'}
           borderBottom={'1px'}
-          borderColor="black"
+          borderColor={hoverElement ? colorsUi.red1 : 'black'}
           position={'relative'}
-          bgImage={datas?.thumbnailUrl}
+          bgImage={datas?.imageUrl}
           bgSize={'cover'}
         />
         <Box p={4} h={'195px'}>
-          <Box
-            bg="black"
-            display={'inline-block'}
-            px={2}
-            py={1}
-            color="white"
-            mb={2}
+          <Flex
+            gap={hoverElement ? 4 : 2}
+            transition={'0.7s cubic-bezier(0.75, 0, 0.1, 1) 0.3s'}
           >
-            <Text fontSize={'xs'} fontWeight="medium" color={colorsUi.red1}>
-              Fast and code
-            </Text>
-          </Box>
+            {datas?.tags?.map((tags, index) => {
+              return (
+                <Box
+                  bg={hoverElement ? colorsUi.green1 : 'black'}
+                  transition={'0.7s cubic-bezier(0.75, 0, 0.1, 1) 0.3s'}
+                  color={hoverElement ? colorsUi.green2 : 'white'}
+                  px={2}
+                  py={1}
+                  mb={2}
+                  key={index}
+                >
+                  <Text fontSize={'xs'} fontWeight="medium">
+                    {tags}
+                  </Text>
+                </Box>
+              )
+            })}
+          </Flex>
+
           <Heading color={'black'} fontSize={'2xl'} noOfLines={2}>
             {datas?.title}
           </Heading>
         </Box>
-        <HStack borderTop={'1px'} color="black" h={'55px'}>
+        <HStack
+          borderTop={'1px'}
+          color={hoverElement ? colorsUi.red1 : 'black'}
+          transition={'0.7s cubic-bezier(0.75, 0, 0.1, 1) 0.3s'}
+          h={'55px'}
+        >
           <Flex
             p={4}
             alignItems="center"
@@ -68,7 +90,7 @@ const CardYt: React.FC<CardYtProps> = ({datas}) => {
             w="full"
           >
             <Text fontSize={'md'} fontWeight={'semibold'}>
-              View more
+              Voir la vidéo
             </Text>
             <BsArrowUpRight />
           </Flex>
@@ -82,7 +104,7 @@ const CardYt: React.FC<CardYtProps> = ({datas}) => {
             onClick={() => setLiked(!liked)}
           >
             {liked ? (
-              <BsHeartFill fill="red" fontSize={'24px'} />
+              <BsHeartFill fill={colorsUi.red1} fontSize={'24px'} />
             ) : (
               <BsHeart fontSize={'24px'} />
             )}

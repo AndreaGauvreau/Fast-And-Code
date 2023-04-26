@@ -7,15 +7,47 @@ import styles from './page.module.css'
 
 export default function Home() {
   const {data: videos, isLoading, isError} = useVideos(youtubeApi, chanelId)
-  if (isLoading) return <CardSkeleton />
+  if (isLoading)
+    return (
+      <Flex
+        w={'100vw'}
+        maxH={'100vh'}
+        minH={'100vh'}
+        justifyContent={'center'}
+        alignItems={'center'}
+      >
+        <CardSkeleton />
+      </Flex>
+    )
   if (isError || !videos) return <div>Error loading videos.</div>
   return (
-    <div>
-      <Flex flexDir={'row'} flexWrap={'wrap'} gap={10}>
-        {videos.map((video, index) => (
-          <CardYt key={index} datas={video} />
-        ))}
+    <>
+      <Flex
+        w={'100vw'}
+        maxH={'100vh'}
+        minH={'100vh'}
+        justifyContent={'center'}
+        alignItems={'center'}
+      >
+        <Flex
+          flexDir={'row'}
+          flexWrap={'nowrap'}
+          gap={10}
+          overflowX={'scroll'}
+          sx={{
+            '::-webkit-scrollbar': {
+              display: 'none',
+            },
+            scrollbarWidth: 'none',
+            msOverflowStyle: 'none',
+          }}
+          p={10}
+        >
+          {videos.map((video, index) => (
+            <CardYt key={index} datas={video} />
+          ))}
+        </Flex>
       </Flex>
-    </div>
+    </>
   )
 }
