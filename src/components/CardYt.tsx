@@ -13,6 +13,7 @@ import {
 import {BsArrowUpRight, BsHeartFill, BsHeart} from 'react-icons/bs'
 import {Video} from '~/helpers/youtube'
 import {colorsUi} from '~/ui/colors.js'
+import Link from 'next/link'
 
 interface CardYtProps {
   datas: Video
@@ -89,9 +90,11 @@ const CardYt: React.FC<CardYtProps> = ({datas}) => {
             cursor={'pointer'}
             w="full"
           >
-            <Text fontSize={'md'} fontWeight={'semibold'}>
-              Voir la vidéo
-            </Text>
+            <Link href={datas?.url} target={'_blank'}>
+              <Text fontSize={'md'} fontWeight={'semibold'}>
+                Voir la vidéo
+              </Text>
+            </Link>
             <BsArrowUpRight />
           </Flex>
           <Flex
