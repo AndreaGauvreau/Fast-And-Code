@@ -37,10 +37,11 @@ export default function MainMenu() {
               <IconButton
                 as={FiYoutube}
                 size={'lg'}
-                p={1}
+                p={3}
+                rounded={'none'}
                 aria-label="YouTube"
-                bg={colorsUi.white1 + 40}
-                _hover={{bg: colorsUi.white1, color: colorsUi?.grey1}}
+                bg={colorsUi.grey3}
+                _hover={{bg: colorsUi.grey2}}
                 color={colorsUi.white1}
               />
             </Link>
@@ -48,10 +49,11 @@ export default function MainMenu() {
               <IconButton
                 as={FiGlobe}
                 size={'lg'}
-                p={1}
+                p={3}
+                rounded={'none'}
                 aria-label="Website"
-                bg={colorsUi.white1 + 40}
-                _hover={{bg: colorsUi.white1, color: colorsUi?.grey1}}
+                bg={colorsUi.grey3}
+                _hover={{bg: colorsUi.grey2}}
                 color={colorsUi.white1}
               />
             </Link>

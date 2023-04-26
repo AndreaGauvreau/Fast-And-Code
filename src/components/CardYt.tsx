@@ -9,11 +9,16 @@ import {
   useColorModeValue,
   HStack,
   Skeleton,
+  ModalOverlay,
+  Modal,
+  ModalContent,
+  ModalBody,
+  AspectRatio,
 } from '@chakra-ui/react'
 import {BsArrowUpRight, BsHeartFill, BsHeart} from 'react-icons/bs'
 import {Video} from '~/helpers/youtube'
 import {colorsUi} from '~/ui/colors.js'
-import Link from 'next/link'
+import ReactPlayer from 'react-player'
 
 interface CardYtProps {
   datas: Video
@@ -22,6 +27,15 @@ interface CardYtProps {
 const CardYt: React.FC<CardYtProps> = ({datas}) => {
   const [hoverElement, setHoverElement] = useState(false)
   const [liked, setLiked] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
+
+  const openModal = () => {
+    setIsOpen(true)
+  }
+
+  const closeModal = () => {
+    setIsOpen(false)
+  }
   return (
     <Center py={6} h={'500px'}>
       <Box
@@ -35,7 +49,7 @@ const CardYt: React.FC<CardYtProps> = ({datas}) => {
         borderColor={hoverElement ? colorsUi.red1 : 'black'}
         onMouseEnter={() => setHoverElement(true)}
         onMouseLeave={() => setHoverElement(false)}
-        transition={'0.7s cubic-bezier(0.75, 0, 0.1, 1)'}
+        transition={'0.5s cubic-bezier(0.75, 0, 0.1, 1)'}
         boxShadow={
           hoverElement ? `12px 12px 0 ${colorsUi?.red1}` : `6px 6px 0 black`
         }
@@ -47,6 +61,8 @@ const CardYt: React.FC<CardYtProps> = ({datas}) => {
           position={'relative'}
           bgImage={datas?.imageUrl}
           bgSize={'cover'}
+          onClick={openModal}
+          cursor="pointer"
         />
         <Box p={4} h={'195px'}>
           <Flex
@@ -89,14 +105,41 @@ const CardYt: React.FC<CardYtProps> = ({datas}) => {
             roundedBottom={'sm'}
             cursor={'pointer'}
             w="full"
+            onClick={openModal}
           >
-            <Link href={datas?.url} target={'_blank'}>
-              <Text fontSize={'md'} fontWeight={'semibold'}>
-                Voir la vidéo
-              </Text>
-            </Link>
+            <Text fontSize={'md'} fontWeight={'semibold'}>
+              Voir la vidéo
+            </Text>
+
             <BsArrowUpRight />
           </Flex>
+          <Modal
+            isCentered
+            isOpen={isOpen}
+            onClose={closeModal}
+            motionPreset="scale"
+          >
+            <ModalOverlay backdropFilter={'blur(10px)'} />
+            <ModalContent minW={'70vw'}>
+              <AspectRatio ratio={16 / 9}>
+                <ModalBody
+                  minW={'100%'}
+                  maxW={'1000px'}
+                  p={0}
+                  rounded={'4px'}
+                  overflow={'hidden'}
+                >
+                  <ReactPlayer
+                    width={'100%'}
+                    height={'100%'}
+                    url={datas?.url}
+                    controls={true}
+                  />
+                </ModalBody>
+              </AspectRatio>
+            </ModalContent>
+          </Modal>
+
           <Flex
             p={4}
             alignItems="center"
