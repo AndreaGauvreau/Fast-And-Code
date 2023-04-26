@@ -1,3 +1,4 @@
+'use client'
 import React, {useState} from 'react'
 import styled from 'styled-components'
 import Highlight, {defaultProps} from 'prism-react-renderer'
@@ -13,8 +14,8 @@ const Pre = styled.pre`
   margin: 1em 0;
   padding: 1.5em;
   padding-right: 3rem;
-
   border-radius: 10px;
+  overflow-x: scroll;
   width: 100%;
 `
 
@@ -52,7 +53,7 @@ export const CodeBlock = ({code, language = 'css', lineNB = true}) => {
 
   const formattedCode = format(code, {
     parser: language,
-    plugins: [parserTypescript],
+    plugins: [language === 'css' ? parserCss : parserTypescript],
     printWidth: 80,
     tabWidth: 2,
     useTabs: false,
@@ -98,8 +99,8 @@ export const CodeBlock = ({code, language = 'css', lineNB = true}) => {
           as={hasCopied ? CheckIcon : CopyIcon}
           position="absolute"
           color={'white'}
-          top={'50px'}
-          right={'50px'}
+          top={'30px'}
+          right={'30px'}
           cursor="pointer"
           onClick={handleCopy}
         />

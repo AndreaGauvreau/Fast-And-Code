@@ -12,6 +12,7 @@ import {
   DrawerContent,
   DrawerCloseButton,
   useDisclosure,
+  Progress,
 } from '@chakra-ui/react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -19,23 +20,51 @@ import Link from 'next/link'
 import {usePathname} from 'next/navigation'
 import {videos} from '~/helpers/datas'
 import {colorsUi} from '~/ui/colors'
+import CanvasModel from '~/components/coffe/Canvas.jsx'
+import {useEffect, useState} from 'react'
+
 export default function Layout({children}: LayoutProps) {
   const {isOpen, onOpen, onClose} = useDisclosure()
+  const [isCounting, setIsCounting] = useState(false)
+  const [progressValue, setProgressValue] = useState(0)
+
+  useEffect(() => {
+    let intervalId: any
+
+    if (isCounting) {
+      setProgressValue(100)
+      intervalId = setInterval(() => {
+        setProgressValue(value => value - 0.1)
+      }, 10)
+    } else {
+      setProgressValue(0)
+      clearInterval(intervalId)
+    }
+    if (isCounting === true) {
+      setTimeout(() => {
+        setIsCounting(false)
+      }, 10000)
+    }
+    return () => clearInterval(intervalId)
+  }, [isCounting])
 
   return (
     <Flex h={'100vh'}>
+      <CanvasModel isCounting={isCounting} setIsCounting={setIsCounting} />
       <Box
-        display={['none', 'none', 'inline']}
+        display={['none', 'none', 'none', 'inline']}
         position="fixed"
         h={'100%'}
         width="320px"
         bg={colorsUi.grey1}
         left={0}
+        transition={'0.3s ease'}
+        transform={isCounting ? 'translateX(-100%)' : 'translateX(0px)'}
       >
         <Sidebar />
       </Box>
       <IconButton
-        display={['block', 'block', 'none']}
+        display={['block', 'block', 'block', 'none']}
         aria-label="Open menu"
         icon={<HamburgerIcon />}
         onClick={onOpen}
@@ -52,7 +81,24 @@ export default function Layout({children}: LayoutProps) {
           <Sidebar />
         </DrawerContent>
       </Drawer>
-      <Box flex="1" marginLeft={4} ml={{base: '0px', lg: '320px'}}>
+      <Box
+        flex="1"
+        marginLeft={4}
+        transition={'0.3s ease'}
+        ml={{base: '0px', lg: isCounting ? '0px' : '320px'}}
+        position={'relative'}
+      >
+        <Progress
+          value={isCounting ? progressValue : 0}
+          display={isCounting ? 'inline' : 'none'}
+          position="fixed"
+          size="md"
+          top={'0%'}
+          left={'0px'}
+          zIndex={10}
+          w={'100vw'}
+          className={isCounting ? 'animateGradient' : ''}
+        />
         {children}
       </Box>
     </Flex>
