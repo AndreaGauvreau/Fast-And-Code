@@ -1,7 +1,7 @@
 'use client'
 import {Flex} from '@chakra-ui/react'
-import Image from 'next/image'
 import CardYt, {CardSkeleton} from '~/components/CardYt'
+import MainMenu from '~/components/MainMenu'
 import {chanelId, useVideos, youtubeApi} from '~/helpers/youtube'
 import styles from './page.module.css'
 
@@ -16,12 +16,14 @@ export default function Home() {
         justifyContent={'center'}
         alignItems={'center'}
       >
+        <MainMenu />
         <CardSkeleton />
       </Flex>
     )
   if (isError || !videos) return <div>Error loading videos.</div>
   return (
     <>
+      <MainMenu />
       <Flex
         w={'100vw'}
         maxH={'100vh'}

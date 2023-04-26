@@ -19,6 +19,7 @@ import {BsArrowUpRight, BsHeartFill, BsHeart} from 'react-icons/bs'
 import {Video} from '~/helpers/youtube'
 import {colorsUi} from '~/ui/colors.js'
 import ReactPlayer from 'react-player'
+import Link from 'next/link'
 
 interface CardYtProps {
   datas: Video
@@ -54,44 +55,45 @@ const CardYt: React.FC<CardYtProps> = ({datas}) => {
           hoverElement ? `12px 12px 0 ${colorsUi?.red1}` : `6px 6px 0 black`
         }
       >
-        <Box
-          h={'200px'}
-          borderBottom={'1px'}
-          borderColor={hoverElement ? colorsUi.red1 : 'black'}
-          position={'relative'}
-          bgImage={datas?.imageUrl}
-          bgSize={'cover'}
-          onClick={openModal}
-          cursor="pointer"
-        />
-        <Box p={4} h={'195px'}>
-          <Flex
-            gap={hoverElement ? 4 : 2}
-            transition={'0.7s cubic-bezier(0.75, 0, 0.1, 1) 0.3s'}
-          >
-            {datas?.tags?.map((tags, index) => {
-              return (
-                <Box
-                  bg={hoverElement ? colorsUi.green1 : 'black'}
-                  transition={'0.7s cubic-bezier(0.75, 0, 0.1, 1) 0.3s'}
-                  color={hoverElement ? colorsUi.green2 : 'white'}
-                  px={2}
-                  py={1}
-                  mb={2}
-                  key={index}
-                >
-                  <Text fontSize={'xs'} fontWeight="medium">
-                    {tags}
-                  </Text>
-                </Box>
-              )
-            })}
-          </Flex>
+        <Link href={`/tutos/${datas?.slug}`}>
+          <Box
+            h={'200px'}
+            borderBottom={'1px'}
+            borderColor={hoverElement ? colorsUi.red1 : 'black'}
+            position={'relative'}
+            bgImage={datas?.imageUrl}
+            bgSize={'cover'}
+            cursor="pointer"
+          />
+          <Box p={4} h={'195px'}>
+            <Flex
+              gap={hoverElement ? 4 : 2}
+              transition={'0.7s cubic-bezier(0.75, 0, 0.1, 1) 0.3s'}
+            >
+              {datas?.tags?.map((tags, index) => {
+                return (
+                  <Box
+                    bg={hoverElement ? colorsUi.green1 : 'black'}
+                    transition={'0.7s cubic-bezier(0.75, 0, 0.1, 1) 0.3s'}
+                    color={hoverElement ? colorsUi.green2 : 'white'}
+                    px={2}
+                    py={1}
+                    mb={2}
+                    key={index}
+                  >
+                    <Text fontSize={'xs'} fontWeight="medium">
+                      {tags}
+                    </Text>
+                  </Box>
+                )
+              })}
+            </Flex>
 
-          <Heading color={'black'} fontSize={'2xl'} noOfLines={2}>
-            {datas?.title}
-          </Heading>
-        </Box>
+            <Heading color={'black'} fontSize={'2xl'} noOfLines={2}>
+              {datas?.title}
+            </Heading>
+          </Box>
+        </Link>
         <HStack
           borderTop={'1px'}
           color={hoverElement ? colorsUi.red1 : 'black'}
@@ -108,7 +110,7 @@ const CardYt: React.FC<CardYtProps> = ({datas}) => {
             onClick={openModal}
           >
             <Text fontSize={'md'} fontWeight={'semibold'}>
-              Voir la vidéo
+              Voir
             </Text>
 
             <BsArrowUpRight />

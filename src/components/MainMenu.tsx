@@ -15,7 +15,15 @@ import {colorsUi} from '~/ui/colors'
 export default function MainMenu() {
   return (
     <>
-      <Box bg={colorsUi.grey1} px={4} position={'absolute'} w={'100vw'}>
+      <Box
+        bg={colorsUi.grey1}
+        px={4}
+        position={'fixed'}
+        w={'100vw'}
+        zIndex={3}
+        top={'0px'}
+        left={'0px'}
+      >
         <Flex
           h={'85px'}
           alignItems={'center'}

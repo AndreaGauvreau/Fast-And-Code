@@ -6,6 +6,7 @@ export const chanelId = process.env.NEXT_PUBLIC_YOUTUBE_CHANEL ?? ''
 export interface Video {
   id: string
   title: string
+  slug: string
   imageUrl: string
   description: string
   url: string
@@ -29,10 +30,11 @@ export function useVideos(apiKey: string, channelId: string) {
   )
 }
 
-const videos: Video[] = [
+export const videos: Video[] = [
   {
     id: '1',
-    title: 'Je refais (et améliore) le site de TESLA en 24H',
+    slug: 'scrolltracking',
+    title: 'Tracker le scroll de la page',
     imageUrl:
       'https://i.ytimg.com/vi/Zh06rzhTWeA/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAhnsXPRpyBWAU2pjkzJS0WekvMNQ',
     description: 'Description de la première vidéo',
@@ -41,7 +43,8 @@ const videos: Video[] = [
   },
   {
     id: '2',
-    title: 'Je refais (et améliore) le site de TESLA en 24H',
+    slug: 'animation-a-l-apparition',
+    title: 'Animer un élément à son apparition',
     imageUrl:
       'https://i.ytimg.com/vi/Zh06rzhTWeA/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAhnsXPRpyBWAU2pjkzJS0WekvMNQ',
     description: 'Description de la première vidéo',
