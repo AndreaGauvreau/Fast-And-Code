@@ -5,18 +5,24 @@ import Image from 'next/image'
 
 const articleNo = 1
 export default function Scroll() {
+  const article = videos[articleNo]
   return (
     <>
       <div className={styles.contentHead}>
-        <h1 className={styles.h1}>{videos[articleNo]?.title}</h1>
+        <h1 className={styles.h1}>{article?.title}</h1>
         <div className={styles.imageBox}>
           <Image
-            src={videos[articleNo]?.imageUrl}
+            src={article?.imageUrl}
             fill
-            alt={videos[articleNo]?.title}
+            alt={article?.title}
             objectFit="cover"
             priority
           />
+        </div>
+        <div className={styles.tagsFlex}>
+          {article?.tags.map((e: string, index: number) => {
+            return <span key={index}>{e}</span>
+          })}
         </div>
       </div>
     </>

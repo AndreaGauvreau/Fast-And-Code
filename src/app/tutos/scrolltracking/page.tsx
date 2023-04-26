@@ -20,7 +20,7 @@ export default function Scroll() {
           />
         </div>
         <div className={styles.tagsFlex}>
-          {article?.tags.map((e, index) => {
+          {article?.tags.map((e: string, index: number) => {
             return <span key={index}>{e}</span>
           })}
         </div>
