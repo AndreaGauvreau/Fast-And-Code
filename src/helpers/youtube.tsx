@@ -9,6 +9,7 @@ export interface Video {
   title: string
   description: string
   thumbnailUrl: string
+  date: string
 }
 
 export async function fetchVideos(
@@ -24,6 +25,7 @@ export async function fetchVideos(
     title: item.snippet.title,
     description: item.snippet.description,
     thumbnailUrl: item.snippet.thumbnails.medium.url,
+    date: item.snippet.publishedAt,
   }))
 }
 
