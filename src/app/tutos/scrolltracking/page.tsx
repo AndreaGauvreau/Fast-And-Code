@@ -2,6 +2,8 @@ import {generateMetadataReturn} from '~/helpers/metadata'
 import {videos} from '~/helpers/datas'
 import styles from '../../page.module.css'
 import Image from 'next/image'
+import ScrollExemple from '~/components/tutos/scrolltracker/scrollExemple'
+import ScrollTracker from '~/components/tutos/scrolltracker/scrollTracker'
 
 const articleNo = 0
 export default function Scroll() {
@@ -23,6 +25,10 @@ export default function Scroll() {
           {article?.tags.map((e: string, index: number) => {
             return <span key={index}>{e}</span>
           })}
+        </div>
+        <div className={styles.scrollSection}>
+          <ScrollExemple />
+          <ScrollTracker />
         </div>
       </div>
     </>

@@ -1,5 +1,4 @@
 import './globals.css'
-
 import ChakraProv from '~/helpers/chakra'
 import QuerysClient from '~/helpers/querysClient.jsx'
 import {colorsUi} from '~/ui/colors.js'

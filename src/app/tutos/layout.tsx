@@ -25,10 +25,12 @@ export default function Layout({children}: LayoutProps) {
   return (
     <Flex h={'100vh'}>
       <Box
-        display={['none', 'none', 'block']}
+        display={['none', 'none', 'inline']}
+        position="fixed"
         h={'100%'}
         width="320px"
         bg={colorsUi.grey1}
+        left={0}
       >
         <Sidebar />
       </Box>
@@ -50,7 +52,7 @@ export default function Layout({children}: LayoutProps) {
           <Sidebar />
         </DrawerContent>
       </Drawer>
-      <Box flex="1" marginLeft={4}>
+      <Box flex="1" marginLeft={4} ml={{base: '0px', lg: '320px'}}>
         {children}
       </Box>
     </Flex>
