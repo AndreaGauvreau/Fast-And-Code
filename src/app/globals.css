@@ -25,9 +25,10 @@ body {
 .animateGradient div {
   background: linear-gradient(
     40deg,
-    rgba(252, 63, 251, 1) 0%,
-    rgba(107, 0, 255, 1) 50%,
-    rgba(64, 252, 121, 1) 100%
+    #ff6347 0%,
+    #8d0000 33%,
+    #7fff00 66%,
+    #009900 100%
   );
   background-size: 300% 300%;
   animation: gradient-animation 5s ease infinite;
@@ -43,4 +44,9 @@ body {
   100% {
     background-position: 0% 50%;
   }
+}
+
+strong {
+  font-weight: 900;
+  font-family: Poppins;
 }

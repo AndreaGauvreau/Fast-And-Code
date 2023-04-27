@@ -51,20 +51,22 @@ export const CodeBlock = ({code, language = 'css', lineNB = true}) => {
     }, 10)
   }
 
-  const formattedCode = format(code, {
-    parser: language,
-    plugins: [language === 'css' ? parserCss : parserTypescript],
-    printWidth: 80,
-    tabWidth: 2,
-    useTabs: false,
-    semi: true,
-    singleQuote: false,
-    trailingComma: 'es5',
-    bracketSpacing: true,
-    jsxBracketSameLine: false,
-    arrowParens: 'always',
-  })
-
+  const formattedCode =
+    language === 'shell'
+      ? code
+      : format(code, {
+          parser: language,
+          plugins: [language === 'css' ? parserCss : parserTypescript],
+          printWidth: 80,
+          tabWidth: 2,
+          useTabs: false,
+          semi: true,
+          singleQuote: false,
+          trailingComma: 'es5',
+          bracketSpacing: true,
+          jsxBracketSameLine: false,
+          arrowParens: 'always',
+        })
   return (
     <>
       <Flex

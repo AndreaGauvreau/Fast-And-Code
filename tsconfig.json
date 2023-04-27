@@ -29,6 +29,6 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src/ui/colors.js"
-  ],
+, "src/components/BoostCoffe.jsx"  ],
   "exclude": ["node_modules"]
 }
