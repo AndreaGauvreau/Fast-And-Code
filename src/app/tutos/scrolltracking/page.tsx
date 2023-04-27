@@ -2,8 +2,6 @@ import {generateMetadataReturn} from '~/helpers/metadata'
 import {videos} from '~/helpers/datas'
 import styles from '../../page.module.css'
 import Image from 'next/image'
-import ScrollExemple from '~/components/tutos/scrolltracker/scrollExemple'
-import ScrollTracker from '~/components/tutos/scrolltracker/scrollTracker'
 import {CodeBlock} from '~/components/CodeBlock'
 
 const articleNo = 0

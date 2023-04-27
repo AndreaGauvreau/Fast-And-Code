@@ -16,13 +16,14 @@ import {
 } from '@chakra-ui/react'
 import Image from 'next/image'
 import Link from 'next/link'
-
 import {usePathname} from 'next/navigation'
 import {videos} from '~/helpers/datas'
 import {colorsUi} from '~/ui/colors'
-import CanvasModel from '~/components/coffe/Canvas.jsx'
-import {useEffect, useState} from 'react'
-
+import {Suspense, useEffect, useState} from 'react'
+import dynamic from 'next/dynamic'
+const CanvasModel = dynamic(() => import('~/components/coffe/Canvas'), {
+  ssr: false,
+})
 export default function Layout({children}: LayoutProps) {
   const {isOpen, onOpen, onClose} = useDisclosure()
   const [isCounting, setIsCounting] = useState(false)
@@ -50,7 +51,9 @@ export default function Layout({children}: LayoutProps) {
 
   return (
     <Flex h={'100vh'}>
-      <CanvasModel isCounting={isCounting} setIsCounting={setIsCounting} />
+      <Suspense>
+        <CanvasModel isCounting={isCounting} setIsCounting={setIsCounting} />
+      </Suspense>
       <Box
         display={['none', 'none', 'none', 'inline']}
         position="fixed"
